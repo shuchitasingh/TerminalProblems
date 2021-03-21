@@ -1,19 +1,23 @@
-set -vx
-echo "Enter the number"
-read N
+#!/bin/bash  -x
 
-I=$N
-J=2
+#READ UPPER AND LOWER LIMIT
+read -p "Enter a number" start
+read -p "Enter a number" end
 
-until [ $J == $N ]
+#CHECKS PRIME RANGE
+for (( i=start; i<=end; i++ ))
 do
-if [ `expr $I % $J` == 0]
-then
-echo "The number is not prime"
-exit
-else
-J=`expr $J + 1`
-fi
+   count=0
+   for (( j=1; j<=i; j++ ))
+   do
+      if [ $((i%j)) -eq 0 ]
+      then
+         count=$((count+1))
+      fi
+   done
 
-done
-echo "The number is not prime"
+#PRINTS RANGE
+if [ $count -eq 2 ]
+then
+   echo "$i is the Prime number between $start and $end "
+fi
